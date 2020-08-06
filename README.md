@@ -15,3 +15,13 @@ REFER to https://stackoverflow.com/questions/10585683/how-do-you-edit-existing-t
   Can't be used in template strings or strict mode, but you can replace the octal `\033` with hex `\x1b` or unicode `\u001b`
 
 [ANSI Escape sequences - VT100/VT52](http://ascii-table.com/ansi-escape-sequences-vt-100.php)
+
+Extra point about closure
+
+T-Combinator
+
+```javascript
+let y = (g) => ((f) => f(f))((self) => g((...args) => self(self)(...args)));
+let f = y((self) => (n) => (n < 0 ? 0 : n + self(n - 1)));
+console.log(f(100));
+```
