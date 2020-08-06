@@ -32,20 +32,16 @@ function right(n = 1) {
 function left(n = 1) {
   stdout.write("\033[" + n + "D");
 }
-void (async function () {
-  stdout.write("which below option you want select?\n");
-  let res = await select(["React", "Vue", "Angular"]);
-  stdout.write(res + "\n");
-  process.exit();
-})();
+
 async function select(choices) {
   let selected = 0;
   for (const [index, choice] of choices.entries()) {
     if (index === selected) {
-      stdout.write("[\x1b[32mx\x1b[0m]" + choice + "\n");
+      stdout.write("[\x1b[32mx\x1b[0m]" + choice);
     } else {
-      stdout.write("[ ]" + choice + "\n");
+      stdout.write("[ ]" + choice);
     }
+    stdout.write("\t\t" + "😂" + "\n");
   }
   up(choices.length);
   right();
@@ -64,7 +60,7 @@ async function select(choices) {
       left();
       selected--;
       up();
-      stdout.write("\x1b[32mx\x1b[0m");
+      stdout.write("\x1b[32mV\x1b[0m");
       left();
     }
     if (char === "s" && selected < choices.length - 1) {
@@ -81,3 +77,10 @@ async function select(choices) {
     }
   }
 }
+
+void (async function () {
+  stdout.write("which below option you want select?\n");
+  let res = await select(["React", "Vue", "Angular"]);
+  stdout.write(res + "\n");
+  process.exit();
+})();
